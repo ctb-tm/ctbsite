@@ -48,7 +48,7 @@
     }
 
     header img {
-      height: 50px;
+      height: 60px;
       width: auto;
     }
 
@@ -60,11 +60,20 @@
     }
 
     .donation-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .donation-row {
       display: inline-flex;
       align-items: center;
       gap: 2rem;
-      justify-content: center;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
     .qrcode-container {
@@ -83,8 +92,19 @@
     }
 
     .qrcode-container img {
-      height: 50px;
+      height: 60px;
       width: auto;
+    }
+    
+    .zoomable-image {
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .zoomable-image.zoomed {
+      transform: scale(1.3);
+      z-index: 10;
+      position: relative;
     }
 
     .donation-text {
@@ -93,8 +113,8 @@
       font-size: 1rem;
       color: #000;
     }
-
-    .mercado-pago-text {
+    
+    .mercado-pago-text, .bank-info-text {
       font-family: var(--font-heading);
       font-weight: 800;
       font-size: 1rem;
@@ -103,6 +123,11 @@
       padding: .5rem 1rem;
       border-radius: .5rem;
       border: 2px solid var(--green-dark);
+    }
+
+    .bank-info-text {
+      font-size: 0.9rem;
+      font-weight: 400;
     }
 
     nav ul {
@@ -169,31 +194,6 @@
       font-size: 1.25rem;
       margin-bottom: 1rem;
       text-align: center;
-    }
-
-    .podcast-link {
-      display: inline-block;
-      width: 100%;
-      background: linear-gradient(135deg, #1DB954, #1ed760);
-      color: white;
-      text-decoration: none;
-      padding: 1rem;
-      border-radius: .5rem;
-      text-align: center;
-      font-family: var(--font-heading);
-      font-weight: 800;
-      transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
-    }
-
-    .podcast-link:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(29, 185, 84, 0.4);
-    }
-
-    .spotify-icon {
-      margin-right: .5rem;
-      font-size: 1.2rem;
     }
 
     .page {
@@ -336,7 +336,7 @@
       font-size: 1.5rem;
       color: var(--green-dark);
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     .historico-content h3 {
@@ -346,21 +346,34 @@
       color: var(--green-dark);
       margin-top: 1.5rem;
       margin-bottom: .75rem;
+      border-left: 3px solid var(--green-light);
+      padding-left: 1rem;
     }
 
     .historico-content p,
     .historico-content ul {
       margin-bottom: 1rem;
-      color: #333;
+      color: #555;
+      padding-left: 1rem;
     }
 
     .historico-content ul {
       margin-left: 1.5rem;
-      list-style: disc;
+      list-style-type: '✔ ';
     }
 
     .historico-content strong {
       color: var(--green-dark);
+      font-weight: 800;
+    }
+    
+    .visao-estrategica {
+      background-color: #f8f9fa;
+      border-left: 4px solid var(--green-dark);
+      padding: 1rem 1.5rem;
+      border-radius: .5rem;
+      margin-top: 1.5rem;
+      font-style: italic;
     }
 
     footer {
@@ -454,11 +467,6 @@
         height: 300px;
       }
 
-      .donation-container {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
       .project-item {
         flex-direction: column;
         text-align: center;
@@ -491,6 +499,11 @@
       header h1 {
         font-size: 1.25rem;
       }
+      
+      .donation-row {
+          flex-direction: column;
+          gap: 1rem;
+      }
 
       footer {
         padding: 1rem;
@@ -507,16 +520,19 @@
 <body>
   <header>
     <h1>CLUBE DOS TENISTAS DA BAHIA</h1>
-    <img src="ctb.png" alt="Logo CTB">
+    <img src="ctb.png" alt="Logo CTB" class="zoomable-image">
   </header>
 
   <section class="donation-section">
     <div class="donation-container">
-      <div class="qrcode-container">
-        <img src="qrcode.png" alt="QR Code para Doação">
-        <p class="donation-text">DOE</p>
+      <div class="donation-row">
+          <div class="qrcode-container">
+            <img src="qrcode.jpg" alt="QR Code para Doação" class="zoomable-image">
+            <p class="donation-text">DOE</p>
+          </div>
+          <div class="mercado-pago-text">CTB conta Mercado Pago</div>
       </div>
-      <div class="mercado-pago-text">CTB conta Mercado Pago</div>
+      <div class="bank-info-text">Banco 323 - Ag 0001 - Cc 8604599783-0</div>
     </div>
   </section>
 
@@ -543,7 +559,25 @@
         <div id="historico" class="page">
           <div class="white-box historico-content">
             <h2>Histórico e Atuação do CTB: Esporte, Inclusão e Desenvolvimento na Bahia</h2>
-            <p>Fundado em Salvador, o CTB (Clube dos Tenistas da Bahia) consolidou-se como uma entidade de referência em projetos esportivos inclusivos no estado. Sua atuação é focada na promoção do tênis, tênis de mesa e outras modalidades correlatas, com uma atenção especial voltada para o desenvolvimento de ações de impacto em comunidades e grupos vulneráveis. A organização utiliza a Lei de Incentivo ao Esporte como principal ferramenta para viabilizar suas iniciativas.</p>
+            
+            <h3>Fundação e Missão</h3>
+            <p>Fundado em Salvador, o <strong>Clube dos Tenistas da Bahia (CTB)</strong> nasceu da paixão pelo esporte e da crença em seu poder de transformação social. Desde o início, sua missão foi clara: democratizar o acesso ao tênis e ao tênis de mesa, utilizando essas modalidades como ferramentas para a educação, inclusão e desenvolvimento de crianças e jovens em todo o estado.</p>
+
+            <h3>Principais Pilares de Atuação</h3>
+            <p>A atuação do CTB é focada em três pilares centrais que orientam todos os seus projetos e iniciativas:</p>
+            <ul>
+                <li><strong>Inclusão Social:</strong> Levar o esporte a comunidades e grupos vulneráveis, oferecendo uma alternativa saudável de lazer e desenvolvimento pessoal, e promovendo valores como disciplina, respeito e trabalho em equipe.</li>
+                <li><strong>Educação através do Esporte:</strong> Integrar a prática esportiva ao ambiente escolar, como nos projetos "Educar com Tênis de Mesa", reforçando o aprendizado e combatendo a evasão escolar.</li>
+                <li><strong>Fomento ao Esporte:</strong> Utilizar a Lei de Incentivo ao Esporte como principal ferramenta para viabilizar projetos, captar recursos e criar uma estrutura sustentável para o crescimento das modalidades na Bahia.</li>
+            </ul>
+
+            <h3>Visão Estratégica</h3>
+            <div class="visao-estrategica">
+                <p><strong>"Ser uma entidade de referência nacional na gestão de projetos esportivos inclusivos, reconhecida pela excelência, transparência e pelo impacto social positivo gerado na vida dos participantes e em suas comunidades, transformando a Bahia em um celeiro de talentos e cidadãos."</strong></p>
+            </div>
+
+            <h3>Legado e Futuro</h3>
+            <p>Ao longo de sua trajetória, o CTB já impactou a vida de centenas de jovens, consolidando projetos de sucesso e construindo uma forte rede de parceiros. O foco para o futuro é expandir ainda mais o alcance de suas ações, implementando novas tecnologias e metodologias para continuar a transformar vidas através da força do esporte.</p>
           </div>
         </div>
 
@@ -554,7 +588,7 @@
           </div>
           <div class="video-container">
             <h2 class="video-title">Projetos Esportivos Sociais</h2>
-            <iframe src="https://www.youtube.com/embed/ZABbYZ8X304?autoplay=1&mute=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/ZABbYZ8X304?mute=0" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
 
@@ -579,36 +613,34 @@
         </div>
 
         <div id="fotos" class="page">
-  <div class="white-box">
-    <h2 class="projects-title">Galeria de Fotos</h2>
-    <div class="photo-gallery">
-      <div class="photo-item"><img src="ctb1.jpg" alt="CTB Foto 1" data-index="0"></div>
-      <div class="photo-item"><img src="ctb2.jpg" alt="CTB Foto 2" data-index="1"></div>
-      <div class="photo-item"><img src="ctb3.jpg" alt="CTB Foto 3" data-index="2"></div>
-      <div class="photo-item"><img src="ctb4.jpg" alt="CTB Foto 4" data-index="3"></div>
-      <div class="photo-item"><img src="ctb5.jpg" alt="CTB Foto 5" data-index="4"></div>
-      <div class="photo-item"><img src="ctb6.jpg" alt="CTB Foto 6" data-index="5"></div>
-      <div class="photo-item"><img src="ctb7.jpg" alt="CTB Foto 7" data-index="6"></div>
-      <div class="photo-item"><img src="ctb8.jpg" alt="CTB Foto 8" data-index="7"></div>
-      <div class="photo-item"><img src="ctb9.jpg" alt="CTB Foto 9" data-index="8"></div>
-      <div class="photo-item"><img src="ctb10.jpg" alt="CTB Foto 10" data-index="9"></div>
-      <div class="photo-item"><img src="ctb11.jpg" alt="CTB Foto 11" data-index="10"></div>
-      <div class="photo-item"><img src="ctb12.jpg" alt="CTB Foto 12" data-index="11"></div>
-      <div class="photo-item"><img src="ctb13.jpg" alt="CTB Foto 13" data-index="12"></div>
-      <div class="photo-item"><img src="ctb14.jpg" alt="CTB Foto 14" data-index="13"></div>
-      <div class="photo-item"><img src="ctb15.jpg" alt="CTB Foto 15" data-index="14"></div>
-      <div class="photo-item"><img src="ctb16.jpg" alt="CTB Foto 16" data-index="15"></div>
-    </div>
-  </div>
-</div>
+          <div class="white-box">
+            <h2 class="projects-title">Galeria de Fotos</h2>
+            <div class="photo-gallery">
+              <div class="photo-item"><img src="ctb1.jpg" alt="CTB Foto 1" data-index="0"></div>
+              <div class="photo-item"><img src="ctb2.jpg" alt="CTB Foto 2" data-index="1"></div>
+              <div class="photo-item"><img src="ctb3.jpg" alt="CTB Foto 3" data-index="2"></div>
+              <div class="photo-item"><img src="ctb4.jpg" alt="CTB Foto 4" data-index="3"></div>
+              <div class="photo-item"><img src="ctb5.jpg" alt="CTB Foto 5" data-index="4"></div>
+              <div class="photo-item"><img src="ctb6.jpg" alt="CTB Foto 6" data-index="5"></div>
+              <div class="photo-item"><img src="ctb7.jpg" alt="CTB Foto 7" data-index="6"></div>
+              <div class="photo-item"><img src="ctb8.jpg" alt="CTB Foto 8" data-index="7"></div>
+              <div class="photo-item"><img src="ctb9.jpg" alt="CTB Foto 9" data-index="8"></div>
+              <div class="photo-item"><img src="ctb10.jpg" alt="CTB Foto 10" data-index="9"></div>
+              <div class="photo-item"><img src="ctb11.jpg" alt="CTB Foto 11" data-index="10"></div>
+              <div class="photo-item"><img src="ctb12.jpg" alt="CTB Foto 12" data-index="11"></div>
+              <div class="photo-item"><img src="ctb13.jpg" alt="CTB Foto 13" data-index="12"></div>
+              <div class="photo-item"><img src="ctb14.jpg" alt="CTB Foto 14" data-index="13"></div>
+              <div class="photo-item"><img src="ctb15.jpg" alt="CTB Foto 15" data-index="14"></div>
+              <div class="photo-item"><img src="ctb16.jpg" alt="CTB Foto 16" data-index="15"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <aside class="sidebar">
         <div class="podcast-widget">
           <h3 class="podcast-title">🎙️ CTB Podcast</h3>
-          <a href="https://open.spotify.com/episode/3Vo6b2cAijYwpsfWJREAk8?si=athIy5dWTRCmy-4ft2KQ2w" target="_blank" class="podcast-link" rel="noopener noreferrer">
-            <span class="spotify-icon">🎵</span>
-            Ouvir no Spotify<br><small style="font-weight:400;opacity:0.9;">Episódio Mais Recente</small>
-          </a>
+          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/episode/3Vo6b2cAijYwpsfWJREAk8?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
       </aside>
     </div>
@@ -638,6 +670,7 @@
   </footer>
 
   <script>
+    // Função para navegar entre as páginas
     function showPage(pageId, element) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById(pageId).classList.add('active');
@@ -645,6 +678,7 @@
       element.classList.add('active');
     }
 
+    // Lógica para a galeria de fotos (lightbox)
     const galleryImages = document.querySelectorAll('.photo-item img');
     const overlay = document.getElementById('lightbox-overlay');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -672,11 +706,18 @@
     document.getElementById('lightbox-close').addEventListener('click', () => {
       overlay.style.display = 'none';
     });
-
+    
     overlay.addEventListener('click', e => {
       if (e.target === overlay) overlay.style.display = 'none';
     });
+
+    // Lógica para o zoom nas imagens do cabeçalho
+    document.querySelectorAll('.zoomable-image').forEach(image => {
+      image.addEventListener('click', (event) => {
+        event.stopPropagation();
+        image.classList.toggle('zoomed');
+      });
+    });
   </script>
 </body>
-
 </html>
