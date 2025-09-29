@@ -156,35 +156,17 @@
       background: var(--green-dark);
       color: var(--white);
     }
-
-    .main-content {
-      flex: 1;
-    }
-
-    .main-layout {
-      display: flex;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 2rem;
-      gap: 2rem;
-    }
-
-    .content-area {
-      flex: 1;
-    }
-
-    .sidebar {
-      width: 300px;
-      position: sticky;
-      top: 2rem;
+    
+    /* Nova Seção do Player */
+    .podcast-section {
+      padding: 1rem 2rem;
+      background: var(--white);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
     .podcast-widget {
-      background: var(--white);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      margin-bottom: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
     .podcast-title {
@@ -194,6 +176,21 @@
       font-size: 1.25rem;
       margin-bottom: 1rem;
       text-align: center;
+    }
+
+    .main-content {
+      flex: 1;
+    }
+    
+    /* Layout principal agora sem sidebar */
+    .main-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .content-area {
+      width: 100%;
     }
 
     .page {
@@ -454,13 +451,7 @@
       }
 
       .main-layout {
-        flex-direction: column;
         padding: 1rem;
-      }
-
-      .sidebar {
-        width: 100%;
-        position: static;
       }
 
       .video-container iframe {
@@ -488,11 +479,7 @@
     }
 
     @media (max-width:480px) {
-      .main-layout {
-        padding: .5rem;
-      }
-
-      header {
+      header, .main-layout, .podcast-section {
         padding: 1rem;
       }
 
@@ -545,6 +532,13 @@
       <li><a href="#fotos" onclick="showPage('fotos', this)">Fotos</a></li>
     </ul>
   </nav>
+  
+  <section class="podcast-section">
+      <div class="podcast-widget">
+        <h3 class="podcast-title">🎙️ CTB Podcast</h3>
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/episode/3Vo6b2cAijYwpsfWJREAk8?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+  </section>
 
   <main class="main-content">
     <div class="main-layout">
@@ -637,12 +631,6 @@
         </div>
       </div>
 
-      <aside class="sidebar">
-        <div class="podcast-widget">
-          <h3 class="podcast-title">🎙️ CTB Podcast</h3>
-          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/episode/3Vo6b2cAijYwpsfWJREAk8?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-      </aside>
     </div>
   </main>
 
