@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clube dos Tenistas da Bahia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-light: #C3FE4D;
+      --green-dark:  #2BA02D;
+      --white:       #FFFFFF;
+      --font-heading:'Montserrat', sans-serif;
+      --font-body:   'Montserrat', sans-serif;
+    }
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: var(--font-body);
+      background: linear-gradient(135deg, var(--green-light), var(--green-dark));
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: var(--white);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      font-family: var(--font-heading); font-weight: 800;
+    }
+    header h1 {
+      color: var(--green-dark); font-size: 1.75rem;
+    }
+    header img { height: 60px; }
+    .donation-section {
+      background: var(--white); text-align: center;
+      padding: 1rem; border-bottom: 2px solid var(--green-dark);
+    }
+    .qrcode-container {
+      display: inline-flex; align-items: center;
+      gap: 1rem; padding: .5rem 1rem;
+      border: 2px solid var(--green-dark);
+      border-radius: .5rem;
+      background: var(--white);
+      transition: transform .2s ease;
+    }
+    .qrcode-container:hover { transform: scale(1.05); }
+    .donation-text {
+      font-family: var(--font-heading); font-weight: 800;
+      font-size: 1.25rem; color: #000;
+    }
+    nav ul {
+      display: flex; justify-content: center; gap: 2rem;
+      list-style: none; background: rgba(255,255,255,0.8);
+    }
+    nav a {
+      font-family: var(--font-heading); font-weight: 800;
+      color: var(--green-dark); text-decoration: none;
+      padding: .75rem 1.25rem; border-radius: .5rem;
+      transition: background .3s, color .3s;
+    }
+    nav a:hover, nav a.active {
+      background: var(--green-dark); color: var(--white);
+    }
+    .container {
+      max-width: 1200px; margin: 0 auto; padding: 2rem;
+      display: grid; grid-template-columns: 1fr; gap: 2rem;
+    }
+    @media (min-width: 768px) {
+      .container { grid-template-columns: repeat(2,1fr); }
+    }
+    .page { display: none; }
+    .page.active { display: block; }
+    .white-box, .video-container, .projects-section {
+      background: var(--white); border-radius: 1rem;
+      padding: 2rem; box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    .video-container iframe {
+      width: 100%; height: 450px; border-radius: .5rem;
+    }
+    .video-title {
+      font-family: var(--font-heading); font-weight: 800;
+      font-size: 1.25rem; color: var(--white);
+      text-shadow: 2px 2px 4px var(--green-dark);
+      margin-bottom: 1rem; text-align: center;
+    }
+    .projects-title {
+      font-family: var(--font-heading); font-weight: 800;
+      font-size: 1.5rem; color: var(--green-dark);
+      text-align: center; margin-bottom: 1rem;
+    }
+    .project-link {
+      display: inline-block; font-family: var(--font-heading);
+      font-weight: 800; color: var(--white);
+      background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+      padding: 1rem 2rem; border-radius: 2rem;
+      text-decoration: none; transition: opacity .3s, transform .3s;
+    }
+    .project-link:hover { opacity: .9; transform: translateY(-2px); }
+    .historico-content h2 {
+      font-family: var(--font-heading); font-weight: 800;
+      font-size: 1.5rem; color: var(--green-dark);
+      text-align: center; margin-bottom: 1rem;
+    }
+    .historico-content h3 {
+      font-family: var(--font-heading); font-weight: 800;
+      font-size: 1.25rem; color: var(--green-dark);
+      margin-top: 1.5rem; margin-bottom: .75rem;
+    }
+    .historico-content p, .historico-content ul {
+      margin-bottom: 1rem; color: #333;
+    }
+    .historico-content ul { margin-left: 1.5rem; list-style: disc; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CLUBE DOS TENISTAS DA BAHIA</h1>
+    <img src="ctb.png" alt="Logo CTB">
+  </header>
+  <section class="donation-section">
+    <div class="qrcode-container">
+      <img src="qrcode.png" alt="QR Code para Doação">
+      <p class="donation-text">DOE</p>
+    </div>
+  </section>
+  <nav>
+    <ul>
+      <li><a href="#home" class="active" onclick="show('home', this)">Início</a></li>
+      <li><a href="#historico" onclick="show('historico', this)">Histórico</a></li>
+      <li><a href="#projetos" onclick="show('projetos', this)">Projetos</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <div id="home" class="page active">
+      <div class="video-container">
+        <h2 class="video-title">Plataforma ON ESG</h2>
+        <iframe src="https://www.youtube.com/embed/71qOy2UQ0_0?autoplay=1&mute=0"
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div id="historico" class="page">
+      <div class="white-box historico-content">
+        <h2>Histórico e Atuação do CTB: Esporte, Inclusão e Desenvolvimento na Bahia</h2>
+        <p>Fundado em Salvador, o CTB (Clube dos Tenistas da Bahia) consolidou-se como uma entidade de referência em projetos esportivos inclusivos no estado. Sua atuação é focada na promoção do tênis, tênis de mesa e outras modalidades correlatas, com uma atenção especial voltada para o desenvolvimento de ações de impacto em comunidades e grupos vulneráveis. A organização utiliza a Lei de Incentivo ao Esporte como principal ferramenta para viabilizar suas iniciativas.</p>
+        <h3>Diferenciais e Modelo de Atuação</h3>
+        <ul>
+          <li><strong>Parcerias Estratégicas:</strong> Portfólio com Itaú, BASF, Equinox Gold, DASS, Login e HandySolar.</li>
+          <li><strong>Articulação Institucional:</strong> Relacionamento consolidado com prefeituras e secretarias de educação.</li>
+          <li><strong>Governança e Compliance:</strong> Gestão transparente e eficiente.</li>
+          <li><strong>Fábrica de Talentos:</strong> Formação e revelação de atletas de alto rendimento.</li>
+        </ul>
+        <h3>Visão Estratégica</h3>
+        <p>A visão de futuro do CTB é consolidar o esporte como ferramenta de desenvolvimento humano, educação e cidadania, conectando empresas a iniciativas de impacto com total compliance fiscal.</p>
+      </div>
+    </div>
+    <div id="projetos" class="page">
+      <div class="white-box projects-section">
+        <h2 class="projects-title">Projetos/Captação</h2>
+        <a href="https://ctb-tm.github.io/lie-salvador/" class="project-link" target="_blank">Acessar Projeto LIE Salvador</a>
+      </div>
+      <div class="video-container">
+        <h2 class="video-title">Projetos Esportivos Sociais</h2>
+        <iframe src="https://www.youtube.com/embed/ZABbYZ8X304?autoplay=1&mute=0"
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+  <script>
+    function show(id, el) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      el.classList.add('active');
+    }
+  </script>
+</body>
+</html>
