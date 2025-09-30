@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clube dos Tenistas da Bahia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-light: #C3FE4D;
+      --green-dark: #2BA02D;
+      --white: #FFFFFF;
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Montserrat', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: linear-gradient(135deg, var(--green-light), var(--green-dark));
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      font-family: var(--font-heading);
+      font-weight: 800;
+    }
+
+    header h1 {
+      color: var(--green-dark);
+      font-size: 1.75rem;
+    }
+
+    header img {
+      height: 60px;
+      width: auto;
+    }
+
+    .donation-section {
+      background: var(--white);
+      text-align: center;
+      padding: 1rem;
+      border-bottom: 2px solid var(--green-dark);
+    }
+
+    /* Ajuste para alinhar em linha */
+    .donation-container {
+      display: flex;
+      flex-direction: row; /* Alterado */
+      align-items: center;
+      gap: 1.5rem; /* Espaçamento entre os itens */
+      justify-content: center;
+      flex-wrap: wrap; /* Permite quebrar a linha em telas menores */
+    }
+
+    .qrcode-container {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .5rem 1rem;
+      border: 2px solid var(--green-dark);
+      border-radius: .5rem;
+      background: var(--white);
+      transition: transform .2s ease;
+    }
+
+    .qrcode-container:hover {
+      transform: scale(1.05);
+    }
+
+    .qrcode-container img {
+      height: 60px;
+      width: auto;
+    }
+    
+    .zoomable-image {
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .zoomable-image.zoomed {
+      transform: scale(1.3);
+      z-index: 10;
+      position: relative;
+    }
+
+    .donation-text {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1rem;
+      color: #000;
+    }
+    
+    .mercado-pago-text, .bank-info-text {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--green-dark);
+      background: #f8f9fa;
+      padding: .5rem 1rem;
+      border-radius: .5rem;
+      border: 2px solid var(--green-dark);
+    }
+
+    .bank-info-text {
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      list-style: none;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 1rem 0;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--green-dark);
+      text-decoration: none;
+      padding: .75rem 1.25rem;
+      border-radius: .5rem;
+      transition: background .3s, color .3s;
+      font-size: .9rem;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: var(--green-dark);
+      color: var(--white);
+    }
+    
+    .podcast-section {
+      padding: 1rem 2rem;
+      background: var(--white);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .podcast-widget {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .podcast-title {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--green-dark);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .main-content {
+      flex: 1;
+    }
+    
+    .main-layout {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .content-area {
+      width: 100%;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .white-box,
+    .video-container,
+    .projects-section {
+      background: var(--white);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .video-container iframe {
+      width: 100%;
+      height: 450px;
+      border-radius: .5rem;
+    }
+
+    .video-title {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--white);
+      text-shadow: 2px 2px 4px var(--green-dark);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .projects-title {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--green-dark);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .project-link {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      transition: opacity .3s, transform .3s;
+    }
+
+    .project-link:hover {
+      opacity: .9;
+      transform: translateY(-2px);
+    }
+
+    .project-item {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-radius: 1rem;
+      border-left: 4px solid var(--green-dark);
+    }
+
+    .project-item img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: .5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-content {
+      flex: 1;
+    }
+
+    .project-content h3 {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--green-dark);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-instagram-link {
+      display: inline-block;
+      background: linear-gradient(135deg, #E4405F, #C13584);
+      color: white;
+      text-decoration: none;
+      padding: .75rem 1.5rem;
+      border-radius: 2rem;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .project-instagram-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(228, 64, 95, 0.3);
+    }
+
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .photo-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: .5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform .3s;
+    }
+
+    .photo-item:hover {
+      transform: scale(1.05);
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .historico-content h2 {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--green-dark);
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .historico-content h3 {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--green-dark);
+      margin-top: 1.5rem;
+      margin-bottom: .75rem;
+      border-left: 3px solid var(--green-light);
+      padding-left: 1rem;
+    }
+
+    .historico-content p,
+    .historico-content ul {
+      margin-bottom: 1rem;
+      color: #555;
+      padding-left: 1rem;
+    }
+
+    .historico-content ul {
+      margin-left: 1.5rem;
+      list-style-type: '✔ ';
+    }
+
+    .historico-content strong {
+      color: var(--green-dark);
+      font-weight: 800;
+    }
+    
+    .visao-estrategica {
+      background-color: #f8f9fa;
+      border-left: 4px solid var(--green-dark);
+      padding: 1rem 1.5rem;
+      border-radius: .5rem;
+      margin-top: 1.5rem;
+      font-style: italic;
+    }
+
+    footer {
+      background: var(--white);
+      border-top: 3px solid var(--green-dark);
+      padding: 2rem;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-info {
+      flex: 1;
+      font-family: var(--font-body);
+      color: #333;
+      line-height: 1.8;
+    }
+
+    .footer-info h4 {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      color: var(--green-dark);
+      margin-bottom: .5rem;
+    }
+
+    .footer-info p {
+      margin-bottom: .25rem;
+    }
+
+    .footer-info a {
+      color: var(--green-dark);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-info a:hover {
+      text-decoration: underline;
+    }
+
+    .linkedin-link {
+      display: inline-block;
+      transition: transform .2s;
+    }
+
+    .linkedin-link:hover {
+      transform: scale(1.1);
+    }
+
+    .linkedin-link img {
+      height: 60px;
+      width: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width:768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .main-layout {
+        padding: 1rem;
+      }
+
+      .video-container iframe {
+        height: 300px;
+      }
+
+      .project-item {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .photo-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-info {
+        text-align: center;
+      }
+    }
+
+    @media (max-width:520px) { /* Ponto de quebra para o cabeçalho de doação */
+      header, .main-layout, .podcast-section {
+        padding: 1rem;
+      }
+
+      header h1 {
+        font-size: 1.25rem;
+      }
+      
+      .donation-container { /* Volta a ser coluna em telas pequenas */
+          flex-direction: column;
+          gap: 1rem;
+      }
+
+      footer {
+        padding: 1rem;
+      }
+
+      nav a {
+        font-size: .8rem;
+        padding: .5rem 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>CLUBE DOS TENISTAS DA BAHIA</h1>
+    <img src="ctb.png" alt="Logo CTB" class="zoomable-image">
+  </header>
+
+  <section class="donation-section">
+    <div class="donation-container">
+      <div class="qrcode-container">
+        <img src="qrcode.jpg" alt="QR Code para Doação" class="zoomable-image">
+        <p class="donation-text">DOE</p>
+      </div>
+      <div class="mercado-pago-text">CTB conta Mercado Pago</div>
+      <div class="bank-info-text">Banco 323 - Ag 0001 - Cc 8604599783-0</div>
+    </div>
+  </section>
+
+  <nav>
+    <ul>
+      <li><a href="#home" class="active" onclick="showPage('home', this)">Início</a></li>
+      <li><a href="#historico" onclick="showPage('historico', this)">Histórico</a></li>
+      <li><a href="#projetos" onclick="showPage('projetos', this)">Projetos</a></li>
+      <li><a href="#executados" onclick="showPage('executados', this)">Projetos Executados</a></li>
+      <li><a href="#fotos" onclick="showPage('fotos', this)">Fotos</a></li>
+    </ul>
+  </nav>
+  
+  <section class="podcast-section">
+      <div class="podcast-widget">
+        <h3 class="podcast-title">🎙️ CTB Podcast</h3>
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/episode/3Vo6b2cAijYwpsfWJREAk8?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+  </section>
+
+  <main class="main-content">
+    <div class="main-layout">
+      <div class="content-area">
+        <div id="home" class="page active">
+          <div class="video-container">
+            <h2 class="video-title">Plataforma ON ESG</h2>
+            <iframe src="https://www.youtube.com/embed/71qOy2UQ0_0?autoplay=1&mute=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="historico" class="page">
+          <div class="white-box historico-content">
+            <h2>Histórico e Atuação do CTB: Esporte, Inclusão e Desenvolvimento na Bahia</h2>
+            
+            <h3>Fundação e Missão</h3>
+            <p>Fundado em Salvador, o <strong>Clube dos Tenistas da Bahia (CTB)</strong> nasceu da paixão pelo esporte e da crença em seu poder de transformação social. Desde o início, sua missão foi clara: democratizar o acesso ao tênis e ao tênis de mesa, utilizando essas modalidades como ferramentas para a educação, inclusão e desenvolvimento de crianças e jovens em todo o estado.</p>
+
+            <h3>Principais Pilares de Atuação</h3>
+            <p>A atuação do CTB é focada em três pilares centrais que orientam todos os seus projetos e iniciativas:</p>
+            <ul>
+                <li><strong>Inclusão Social:</strong> Levar o esporte a comunidades e grupos vulneráveis, oferecendo uma alternativa saudável de lazer e desenvolvimento pessoal, e promovendo valores como disciplina, respeito e trabalho em equipe.</li>
+                <li><strong>Educação através do Esporte:</strong> Integrar a prática esportiva ao ambiente escolar, como nos projetos "Educar com Tênis de Mesa", reforçando o aprendizado e combatendo a evasão escolar.</li>
+                <li><strong>Fomento ao Esporte:</strong> Utilizar a Lei de Incentivo ao Esporte como principal ferramenta para viabilizar projetos, captar recursos e criar uma estrutura sustentável para o crescimento das modalidades na Bahia.</li>
+            </ul>
+
+            <h3>Visão Estratégica</h3>
+            <div class="visao-estrategica">
+                <p><strong>"Ser uma entidade de referência nacional na gestão de projetos esportivos inclusivos, reconhecida pela excelência, transparência e pelo impacto social positivo gerado na vida dos participantes e em suas comunidades, transformando a Bahia em um celeiro de talentos e cidadãos."</strong></p>
+            </div>
+
+            <h3>Legado e Futuro</h3>
+            <p>Ao longo de sua trajetória, o CTB já impactou a vida de centenas de jovens, consolidando projetos de sucesso e construindo uma forte rede de parceiros. O foco para o futuro é expandir ainda mais o alcance de suas ações, implementando novas tecnologias e metodologias para continuar a transformar vidas através da força do esporte.</p>
+          </div>
+        </div>
+
+        <div id="projetos" class="page">
+          <div class="white-box projects-section">
+            <h2 class="projects-title">Projetos/Captação</h2>
+            <a href="https://ctb-tm.github.io/lie-salvador/" target="_blank" class="project-link">Acessar Projeto LIE Salvador</a>
+          </div>
+          <div class="video-container">
+            <h2 class="video-title">Projetos Esportivos Sociais</h2>
+            <iframe src="https://www.youtube.com/embed/ZABbYZ8X304?mute=0" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div id="executados" class="page">
+          <div class="white-box">
+            <h2 class="projects-title">Projetos Executados</h2>
+            <div class="project-item">
+              <img src="educar.jpg" alt="Educar com Tênis de Mesa">
+              <div class="project-content">
+                <h3>Educar com Tênis de Mesa</h3>
+                <a href="https://www.instagram.com/educarcomtenisdemesa/" target="_blank" class="project-instagram-link">📸 Ver no Instagram</a>
+              </div>
+            </div>
+            <div class="project-item">
+              <img src="estudar.jpg" alt="Estudar na Bahia com Tênis de Mesa">
+              <div class="project-content">
+                <h3>Estudar na Bahia com Tênis de Mesa</h3>
+                <a href="https://www.instagram.com/estudarnabahiatenisdemesa_cam/" target="_blank" class="project-instagram-link">📸 Ver no Instagram</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="fotos" class="page">
+          <div class="white-box">
+            <h2 class="projects-title">Galeria de Fotos</h2>
+            <div class="photo-gallery">
+              <div class="photo-item"><img src="ctb1.jpg" alt="CTB Foto 1" data-index="0"></div>
+              <div class="photo-item"><img src="ctb2.jpg" alt="CTB Foto 2" data-index="1"></div>
+              <div class="photo-item"><img src="ctb3.jpg" alt="CTB Foto 3" data-index="2"></div>
+              <div class="photo-item"><img src="ctb4.jpg" alt="CTB Foto 4" data-index="3"></div>
+              <div class="photo-item"><img src="ctb5.jpg" alt="CTB Foto 5" data-index="4"></div>
+              <div class="photo-item"><img src="ctb6.jpg" alt="CTB Foto 6" data-index="5"></div>
+              <div class="photo-item"><img src="ctb7.jpg" alt="CTB Foto 7" data-index="6"></div>
+              <div class="photo-item"><img src="ctb8.jpg" alt="CTB Foto 8" data-index="7"></div>
+              <div class="photo-item"><img src="ctb9.jpg" alt="CTB Foto 9" data-index="8"></div>
+              <div class="photo-item"><img src="ctb10.jpg" alt="CTB Foto 10" data-index="9"></div>
+              <div class="photo-item"><img src="ctb11.jpg" alt="CTB Foto 11" data-index="10"></div>
+              <div class="photo-item"><img src="ctb12.jpg" alt="CTB Foto 12" data-index="11"></div>
+              <div class="photo-item"><img src="ctb13.jpg" alt="CTB Foto 13" data-index="12"></div>
+              <div class="photo-item"><img src="ctb14.jpg" alt="CTB Foto 14" data-index="13"></div>
+              <div class="photo-item"><img src="ctb15.jpg" alt="CTB Foto 15" data-index="14"></div>
+              <div class="photo-item"><img src="ctb16.jpg" alt="CTB Foto 16" data-index="15"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="lightbox-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:1000;">
+    <img id="lightbox-img" src="" style="max-width:90%;max-height:90%;border-radius:8px;">
+    <button id="lightbox-prev" style="position:absolute;left:2%;top:50%;transform:translateY(-50%);font-size:2rem;color:white;background:none;border:none;cursor:pointer;">‹</button>
+    <button id="lightbox-next" style="position:absolute;right:2%;top:50%;transform:translateY(-50%);font-size:2rem;color:white;background:none;border:none;cursor:pointer;">›</button>
+    <button id="lightbox-close" style="position:absolute;top:2%;right:2%;font-size:2rem;color:white;background:none;border:none;cursor:pointer;">×</button>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-info">
+        <h4>Clube dos Tenistas da Bahia</h4>
+        <p><strong>CNPJ:</strong> 23.146.328/0001-16</p>
+        <p><strong>E-mail:</strong> <a href="mailto:paulo@ctb-ba.com.br">paulo@ctb-ba.com.br</a></p>
+        <p><strong>WhatsApp:</strong> <a href="https://wa.me/5571985304903" target="_blank">71-98530-4903</a></p>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/company/clubedostenistasdabahia/" target="_blank" class="linkedin-link" rel="noopener noreferrer">
+          <img src="ctblinkedin.jpg" alt="CTB LinkedIn">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Função para navegar entre as páginas
+    function showPage(pageId, element) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      element.classList.add('active');
+    }
+
+    // Lógica para a galeria de fotos (lightbox)
+    const galleryImages = document.querySelectorAll('.photo-item img');
+    const overlay = document.getElementById('lightbox-overlay');
+    const lightboxImg = document.getElementById('lightbox-img');
+    let currentIndex;
+
+    galleryImages.forEach(img => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => {
+        currentIndex = parseInt(img.dataset.index);
+        overlay.style.display = 'flex';
+        lightboxImg.src = img.src;
+      });
+    });
+
+    document.getElementById('lightbox-next').addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      lightboxImg.src = galleryImages[currentIndex].src;
+    });
+
+    document.getElementById('lightbox-prev').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      lightboxImg.src = galleryImages[currentIndex].src;
+    });
+
+    document.getElementById('lightbox-close').addEventListener('click', () => {
+      overlay.style.display = 'none';
+    });
+    
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) overlay.style.display = 'none';
+    });
+
+    // Lógica para o zoom nas imagens do cabeçalho
+    document.querySelectorAll('.zoomable-image').forEach(image => {
+      image.addEventListener('click', (event) => {
+        event.stopPropagation();
+        image.classList.toggle('zoomed');
+      });
+    });
+  </script>
+</body>
+</html>
