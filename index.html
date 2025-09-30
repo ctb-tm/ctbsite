@@ -11,6 +11,8 @@
       --green-light: #C3FE4D;
       --green-dark: #2BA02D;
       --white: #FFFFFF;
+      --blue-dark: #0056b3;
+      --blue-light: #007bff;
       --font-heading: 'Montserrat', sans-serif;
       --font-body: 'Montserrat', sans-serif;
     }
@@ -59,14 +61,13 @@
       border-bottom: 2px solid var(--green-dark);
     }
 
-    /* Ajuste para alinhar em linha */
     .donation-container {
       display: flex;
-      flex-direction: row; /* Alterado */
+      flex-direction: row;
       align-items: center;
-      gap: 1.5rem; /* Espaçamento entre os itens */
+      gap: 1.5rem;
       justify-content: center;
-      flex-wrap: wrap; /* Permite quebrar a linha em telas menores */
+      flex-wrap: wrap;
     }
 
     .qrcode-container {
@@ -224,7 +225,15 @@
       font-size: 1.5rem;
       color: var(--green-dark);
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem; /* Aumentado para dar espaço */
+    }
+
+    /* Novo container para os botões de projeto */
+    .project-buttons-container {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
     }
 
     .project-link {
@@ -237,6 +246,11 @@
       border-radius: 2rem;
       text-decoration: none;
       transition: opacity .3s, transform .3s;
+    }
+    
+    /* Novo estilo para o botão azul */
+    .project-link.blue {
+        background: linear-gradient(135deg, var(--blue-light), var(--blue-dark));
     }
 
     .project-link:hover {
@@ -469,7 +483,7 @@
       }
     }
 
-    @media (max-width:520px) { /* Ponto de quebra para o cabeçalho de doação */
+    @media (max-width:520px) {
       header, .main-layout, .podcast-section {
         padding: 1rem;
       }
@@ -478,7 +492,7 @@
         font-size: 1.25rem;
       }
       
-      .donation-container { /* Volta a ser coluna em telas pequenas */
+      .donation-container {
           flex-direction: column;
           gap: 1rem;
       }
@@ -567,7 +581,10 @@
         <div id="projetos" class="page">
           <div class="white-box projects-section">
             <h2 class="projects-title">Projetos/Captação</h2>
-            <a href="https://ctb-tm.github.io/lie-salvador/" target="_blank" class="project-link">Acessar Projeto LIE Salvador</a>
+            <div class="project-buttons-container">
+                <a href="https://ctb-tm.github.io/lie-salvador/" target="_blank" class="project-link">Acessar Projeto LIE Salvador</a>
+                <a href="https://ctb-tm.github.io/festival-satiro-dias/" target="_blank" class="project-link blue">Festival Sátiro Dias</a>
+            </div>
           </div>
           <div class="video-container">
             <h2 class="video-title">Projetos Esportivos Sociais</h2>
