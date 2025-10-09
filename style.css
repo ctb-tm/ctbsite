@@ -2,15 +2,15 @@
 /* SETUP INICIAL E VARIÁVEIS       */
 /*--------------------------------------------------*/
 :root {
-    --green-light: #C3FE4D; /* [cite: 6] */
-    --green-dark: #2BA02D; /* [cite: 7] */
-    --blue-dark: #19305A; /*  */
+    --green-light: #C3FE4D;
+    --green-dark: #2BA02D;
+    --blue-dark: #19305A;
     --white: #FFFFFF;
     --gray-light: #f8f9fa;
     --gray-dark: #343a40;
     
-    --font-heading: 'Montserrat', sans-serif; /* [cite: 2, 3] */
-    --font-body: 'Montserrat', sans-serif; /* [cite: 3] */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
     
     --shadow-soft: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
     --shadow-medium: 0 10px 40px rgba(0, 0, 0, 0.15);
@@ -27,6 +27,7 @@ body {
     background: linear-gradient(135deg, var(--gray-light), #e9ecef);
     color: var(--gray-dark);
     line-height: 1.7;
+    overflow-x: hidden; /* Garante que não haja scroll horizontal desnecessário */
 }
 
 /*--------------------------------------------------*/
@@ -43,7 +44,7 @@ body {
 
 .section-title {
     font-family: var(--font-heading);
-    font-weight: 800; /* [cite: 2] */
+    font-weight: 800;
     color: var(--blue-dark);
     font-size: 1.75rem;
     text-align: center;
@@ -82,7 +83,7 @@ body {
 }
 .main-header h1 {
     font-family: var(--font-heading);
-    font-weight: 800; /* [cite: 2] */
+    font-weight: 800;
     color: var(--blue-dark);
     font-size: 1.5rem;
 }
@@ -473,6 +474,83 @@ body {
 #lightbox-close { top: 2%; right: 2%; font-size: 2.5rem; }
 
 /*--------------------------------------------------*/
+/* BANNER POP-UP (NOVO ESTILO - MENOR) */
+/*--------------------------------------------------*/
+#fullscreen-banner { /* Mantive a ID, mas o estilo é de um pop-up menor */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente escuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Acima de tudo, inclusive lightbox */
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#fullscreen-banner.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Impede cliques quando invisível */
+}
+
+.banner-content {
+    position: relative;
+    /* Ajustes para o tamanho menor */
+    width: 50vw; /* Metade da largura da viewport */
+    height: 50vh; /* Metade da altura da viewport */
+    max-width: 400px; /* Limite máximo de largura para desktops */
+    max-height: 700px; /* Limite máximo de altura para desktops (mantendo 9:16) */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white); /* Fundo branco para o conteúdo do banner */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 1rem; /* Espaçamento interno para a imagem */
+}
+
+.banner-content img {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    width: auto;
+    object-fit: contain; /* Garante que a imagem se ajuste ao contêiner sem cortar */
+    aspect-ratio: 9 / 16; /* Define o formato 9:16 */
+    border-radius: 8px;
+}
+
+#close-banner {
+    position: absolute;
+    top: -15px; /* Ajustado para ficar um pouco fora do banner */
+    right: -15px; /* Ajustado para ficar um pouco fora do banner */
+    background: var(--blue-dark);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 35px; /* Um pouco maior */
+    height: 35px; /* Um pouco maior */
+    font-size: 1.6rem; /* Um pouco maior */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Adicionado sombra para destacar */
+}
+
+#close-banner:hover {
+    background: var(--green-dark);
+    transform: scale(1.1);
+}
+
+/*--------------------------------------------------*/
 /* RESPONSIVIDADE                  */
 /*--------------------------------------------------*/
 @media (max-width: 768px) {
@@ -491,6 +569,14 @@ body {
         flex-direction: column;
         text-align: center;
     }
+
+    /* Ajuste do banner para tablets */
+    .banner-content {
+        width: 70vw; /* Maior em telas menores */
+        height: auto; /* Deixa a altura se ajustar */
+        max-width: 90vw; /* Limite */
+        max-height: 80vh; /* Limite */
+    }
 }
 @media (max-width: 520px) {
     .main-nav ul {
@@ -507,5 +593,19 @@ body {
     }
     .section-title {
         font-size: 1.5rem;
+    }
+
+    /* Ajuste do banner para celulares */
+    .banner-content {
+        width: 90vw; /* Quase tela cheia na largura */
+        height: auto; /* Deixa a altura se ajustar */
+        padding: 0.5rem;
+    }
+    #close-banner {
+        width: 30px;
+        height: 30px;
+        font-size: 1.4rem;
+        top: -10px;
+        right: -10px;
     }
 }
