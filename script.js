@@ -59,4 +59,35 @@ document.addEventListener('DOMContentLoaded', () => {
             image.classList.toggle('zoomed'); // A lógica do zoom em si pode ser feita com CSS
         });
     });
-});
+
+    /*--------------------------------------------------*/
+    /* LÓGICA DO BANNER POP-UP (ADICIONADA)             */
+    /*--------------------------------------------------*/
+    const fullscreenBanner = document.getElementById('fullscreen-banner');
+    const closeBannerButton = document.getElementById('close-banner');
+
+    // Mostra o banner após um pequeno atraso (ex: 1 segundo)
+    if (fullscreenBanner) {
+        setTimeout(() => {
+            fullscreenBanner.classList.remove('hidden');
+        }, 1000); // 1000 milissegundos = 1 segundo
+    }
+
+    // Adiciona listener para fechar o banner ao clicar no botão 'x'
+    if (closeBannerButton) {
+        closeBannerButton.addEventListener('click', function() {
+            if (fullscreenBanner) {
+                fullscreenBanner.classList.add('hidden');
+            }
+        });
+    }
+    // Opcional: Fechar o banner clicando fora dele
+    if (fullscreenBanner) {
+        fullscreenBanner.addEventListener('click', (e) => {
+            if (e.target === fullscreenBanner) { // Verifica se o clique foi no overlay em si, não nos filhos
+                fullscreenBanner.classList.add('hidden');
+            }
+        });
+    }
+
+}); // Fim de DOMContentLoaded
