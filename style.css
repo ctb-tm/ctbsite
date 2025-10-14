@@ -387,7 +387,7 @@ body {
 }
 
 /*--------------------------------------------------*/
-/* RODAPÉ                          */
+/* RODAPÉ (AJUSTES PARA ÍCONES SOCIAIS) */
 /*--------------------------------------------------*/
 .main-footer {
     background: var(--blue-dark);
@@ -425,53 +425,28 @@ body {
     color: var(--green-light);
     text-decoration: underline;
 }
-.linkedin-link img {
-    height: 60px;
+
+.footer-social {
+    display: flex; /* Para que os links fiquem lado a lado */
+    gap: 1rem; /* Espaçamento entre os ícones */
+    align-items: center; /* Centraliza verticalmente os ícones */
+}
+
+/* Garante que as imagens dos links sociais tenham um tamanho consistente */
+.footer-social .linkedin-link img,
+.footer-social .instagram-link img {
+    height: 60px; /* Mantém o tamanho existente */
+    width: auto;
     border-radius: 8px;
     transition: transform 0.3s, box-shadow 0.3s;
 }
-.linkedin-link:hover img {
+
+.footer-social .linkedin-link:hover img,
+.footer-social .instagram-link:hover img {
     transform: scale(1.1);
-    box-shadow: 0 4px 15px rgba(195, 254, 77, 0.3);
+    box-shadow: 0 4px 15px rgba(195, 254, 77, 0.3); /* Sombra para o hover */
 }
 
-/*--------------------------------------------------*/
-/* LIGHTBOX                        */
-/*--------------------------------------------------*/
-#lightbox-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(25, 48, 90, 0.9);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    backdrop-filter: blur(5px);
-}
-#lightbox-img {
-    max-width: 90%;
-    max-height: 80%;
-    border-radius: 8px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.5);
-}
-#lightbox-overlay button {
-    position: absolute;
-    font-size: 3rem;
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-#lightbox-overlay button:hover {
-    transform: scale(1.2);
-}
-#lightbox-prev { left: 2%; top: 50%; transform: translateY(-50%); }
-#lightbox-next { right: 2%; top: 50%; transform: translateY(-50%); }
-#lightbox-close { top: 2%; right: 2%; font-size: 2.5rem; }
 
 /*--------------------------------------------------*/
 /* BANNER POP-UP (NOVO ESTILO - MENOR) */
@@ -576,6 +551,10 @@ body {
         height: auto; /* Deixa a altura se ajustar */
         max-width: 90vw; /* Limite */
         max-height: 80vh; /* Limite */
+    }
+
+    .footer-social {
+        justify-content: center; /* Centraliza os ícones em telas menores */
     }
 }
 @media (max-width: 520px) {
