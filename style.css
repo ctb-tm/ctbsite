@@ -1,36 +1,101 @@
-/* Estilo para centralizar o contêiner do link, se necessário */
-.podcast-link-container {
-    display: flex;
-    flex-direction: column; /* Organiza o parágrafo e o botão verticalmente */
-    align-items: center; /* Centraliza horizontalmente */
-    text-align: center;
-    padding: 20px 0;
-}
+/* ========================================= */
+/* 1. ESTILOS PARA ECRÃS DE TELEMÓVEL (MEDIA QUERY) */
+/* ========================================= */
 
-/* Estilo do Botão Genérico (baseado em btn-primary) */
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-top: 10px;
-    border-radius: 25px; /* Deixa o botão mais arredondado */
-    text-decoration: none;
-    font-weight: 800;
-    transition: background-color 0.3s ease;
-    text-transform: uppercase;
-    font-size: 0.9em;
-}
+/* Aplicar estilos para ecrãs com largura máxima de 768px (a maioria dos telemóveis e tablets pequenos) */
+@media (max-width: 768px) {
+    
+    /* A. CABEÇALHO E LOGO */
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
 
-/* Estilo Específico do Botão Spotify */
-.btn-spotify {
-    /* Cor oficial do Spotify Green */
-    background-color: #1DB954; 
-    color: white !important; /* Força a cor branca do texto */
-    border: 2px solid #1DB954;
-    letter-spacing: 0.5px;
-}
+    .header-content h1 {
+        font-size: 1.2em; /* Reduz o tamanho do título principal */
+        margin-top: 5px;
+    }
 
-.btn-spotify:hover {
-    /* Um verde um pouco mais escuro para o efeito de hover */
-    background-color: #178a3f;
-    transform: scale(1.05); /* Pequeno efeito de zoom */
+    .logo {
+        max-width: 100px; /* Garante que o logo não seja muito grande */
+    }
+
+    /* B. NAVEGAÇÃO (Menu Principal) */
+    .main-nav ul {
+        flex-direction: column; /* Transforma o menu de horizontal para vertical */
+        overflow-x: auto; /* Permite scroll horizontal em alguns casos, mas a coluna resolve o problema */
+        padding: 0 10px;
+    }
+    
+    .main-nav li {
+        width: 100%; /* Faz com que cada item ocupe a largura total */
+        margin: 5px 0; /* Espaçamento entre os links verticais */
+        border-bottom: 1px solid #eee; /* Linha separadora para clareza */
+    }
+    
+    .main-nav a {
+        padding: 10px 15px;
+        justify-content: flex-start; /* Alinha o texto e ícone à esquerda */
+        font-size: 1em;
+    }
+    
+    /* C. SECÇÃO DE DOAÇÃO (QR Code) */
+    .donation-container {
+        flex-direction: column; /* Empilha o QR Code e o texto verticalmente */
+        padding: 20px 10px;
+    }
+    
+    .qrcode-container, .donation-info {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .qrcode-container {
+        order: 1; /* Coloca o QR Code em cima */
+    }
+
+    .donation-info {
+        order: 2; /* Coloca a informação de Pix em baixo */
+    }
+
+    /* D. CAIXAS DE CONTEÚDO E GALERIA */
+    .content-box {
+        padding: 15px; /* Reduz o padding das caixas */
+    }
+    
+    /* Força o video a usar 100% da largura, evitando cortes */
+    .video-wrapper {
+        padding-bottom: 56.25%; /* Mantém o aspeto 16:9 */
+        height: 0;
+        overflow: hidden;
+    }
+
+    /* Galeria: Colunas mais estreitas em telemóvel */
+    .photo-gallery {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em vez de 4 ou mais */
+        gap: 8px;
+    }
+    
+    /* Grelha de Fundos: Empilha as cartas verticalmente */
+    .fundos-grid {
+        grid-template-columns: 1fr; /* Apenas 1 coluna */
+    }
+    
+    /* E. FOOTER */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-info, .footer-social {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .footer-social {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
 }
